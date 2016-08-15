@@ -16,7 +16,8 @@ namespace CustomDatePicker
             var dtPicker = new DateTimePicker()
             {
                 VerticalOptions = LayoutOptions.FillAndExpand,
-                HorizontalOptions = LayoutOptions.FillAndExpand
+                HorizontalOptions = LayoutOptions.FillAndExpand,
+                StringFormat = "HH:mm dd/MM/yyyy"
             };
 
             MainPage = new ContentPage

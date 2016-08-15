@@ -13,7 +13,8 @@ namespace CustomDatePicker
     {
         public DatePicker _datePicker { get; private set; } = new DatePicker() { MinimumDate = DateTime.Today, IsVisible = false };
         public TimePicker _timePicker { get; private set; } = new TimePicker() { IsVisible = false };
-
+        string _stringFormat { get; set; }
+        public string StringFormat { get { return _stringFormat ?? "dd/MM/yyyy HH:mm"; } set { _stringFormat = value; } }
         public DateTime DateTime
         {
             get { return (DateTime)GetValue(DateTimeProperty); }
@@ -75,22 +76,13 @@ namespace CustomDatePicker
 
         private void UpdateEntryText()
         {
-            Text = DateTime.ToString("dd/MM/yyyy HH:mm");
+            Text = DateTime.ToString(StringFormat);
         }
 
         static void DTPropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
             var timePicker = (bindable as DateTimePicker);
             timePicker.UpdateEntryText();
-            return;
-        }
-    }
-
-    public static class DateTimePickerExtensions
-    {
-        public static void UpdateEntryText(this DateTimePicker dtPicker)
-        {
-            dtPicker.Text = dtPicker.DateTime.ToString("HH:mm dd/MM/yyyy");
         }
     }
 }
